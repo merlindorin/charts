@@ -1,0 +1,58 @@
+image:
+  repository: projects.registry.vmware.com/pinniped/pinniped-server
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: [ ]
+
+proxy:
+  service:
+    type: ClusterIP
+    port: 443
+
+api:
+  service:
+    type: ClusterIP
+    port: 443
+
+podAnnotations:
+  scheduler.alpha.kubernetes.io/critical-pod: ""
+
+podSecurityContext:
+  runAsUser: 1001
+  runAsGroup: 1001
+# fsGroup: 2000
+
+securityContext:
+  readOnlyRootFilesystem: true
+  # capabilities:
+  #   drop:
+  #   - ALL
+# readOnlyRootFilesystem: true
+# runAsNonRoot: true
+# runAsUser: 1000
+
+resources: { }
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+tolerations: []
+  # - key: CriticalAddonsOnly
+  #   operator: Exists
+  # - key: node-role.kubernetes.io/master
+  #   effect: NoSchedule
+affinity: {}
+  # podAntiAffinity:
+  #   preferredDuringSchedulingIgnoredDuringExecution:
+  #     - weight: 50
+  #       podAffinityTerm:
+  #         labelSelector:
+  #           matchLabels:
+  #             deployment.pinniped.dev: concierge
+  #         topologyKey: kubernetes.io/hostname
