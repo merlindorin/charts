@@ -1,8 +1,8 @@
-# pinniped-supervisor
+# pinniped-concierge
 
 ![Version: 0.1.1](https://img.shields.io/badge/Version-0.1.1-informational?style=flat-square) ![AppVersion: 0.12.0](https://img.shields.io/badge/AppVersion-0.12.0-informational?style=flat-square)
 
-A Pinniped supervisor helm chart for Kubernetes
+A Pinniped concierge helm chart for Kubernetes
 
 ## Maintainers
 
@@ -15,15 +15,18 @@ A Pinniped supervisor helm chart for Kubernetes
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` |  |
-| fullnameOverride | string | `""` |  |
+| api.service.port | int | `443` |  |
+| api.service.type | string | `"ClusterIP"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"projects.registry.vmware.com/pinniped/pinniped-server"` |  |
 | imagePullSecrets | list | `[]` |  |
-| nameOverride | string | `""` |  |
-| podAnnotations | object | `{}` |  |
+| podAnnotations."scheduler.alpha.kubernetes.io/critical-pod" | string | `""` |  |
+| podSecurityContext.runAsGroup | int | `1001` |  |
+| podSecurityContext.runAsUser | int | `1001` |  |
+| proxy.service.port | int | `443` |  |
+| proxy.service.type | string | `"ClusterIP"` |  |
 | resources | object | `{}` |  |
-| service.port | int | `8443` |  |
-| service.type | string | `"ClusterIP"` |  |
+| securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | tolerations | list | `[]` |  |
 
 ----------------------------------------------
