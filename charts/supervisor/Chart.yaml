@@ -1,0 +1,9 @@
+apiVersion: v2
+name: pinniped-supervisor
+description: A Pinniped supervisor helm chart for Kubernetes
+maintainers:
+  - email: romain.dary@gmail.com
+    name: Romain DARY
+
+version: 0.1.0
+appVersion: "0.12.0"

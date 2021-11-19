@@ -1,0 +1,260 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "concierge.aggregatedApiName" . }}
+  labels:
+    {{- include "concierge.labels" . | nindent 4 }}
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - namespaces
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - apiregistration.k8s.io
+    resources:
+      - apiservices
+    verbs:
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - admissionregistration.k8s.io
+    resources:
+      - validatingwebhookconfigurations
+      - mutatingwebhookconfigurations
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - flowcontrol.apiserver.k8s.io
+    resources:
+      - flowschemas
+      - prioritylevelconfigurations
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - security.openshift.io
+    resources:
+      - securitycontextconstraints
+    verbs:
+      - use
+    resourceNames:
+      - nonroot
+  - apiGroups:
+      - ""
+    resources:
+      - nodes
+    verbs:
+      - list
+  - apiGroups:
+      - config.concierge.pinniped.dev
+    resources:
+      - credentialissuers
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+  - apiGroups:
+      - config.concierge.pinniped.dev
+    resources:
+      - credentialissuers/status
+    verbs:
+      - get
+      - patch
+      - update
+  - apiGroups:
+      - authentication.concierge.pinniped.dev
+    resources:
+      - jwtauthenticators
+      - webhookauthenticators
+    verbs:
+      - get
+      - list
+      - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: pinniped-concierge-impersonation-proxy
+  labels:
+    {{- include "concierge.labels" . | nindent 4 }}
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - users
+      - groups
+      - serviceaccounts
+    verbs:
+      - impersonate
+  - apiGroups:
+      - authentication.k8s.io
+    resources:
+      - '*'
+    verbs:
+      - impersonate
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ include "concierge.kubeCertAgentName" . }}
+  labels:
+    {{- include "concierge.labels" . | nindent 4 }}
+rules:
+  - apiGroups:
+      - policy
+    resources:
+      - podsecuritypolicies
+    verbs:
+      - use
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ include "concierge.aggregatedApiName" . }}
+  labels:
+    {{- include "concierge.labels" . | nindent 4 }}
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - services
+    verbs:
+      - create
+      - get
+      - list
+      - patch
+      - update
+      - watch
+      - delete
+  - apiGroups:
+      - ""
+    resources:
+      - secrets
+    verbs:
+      - create
+      - get
+      - list
+      - patch
+      - update
+      - watch
+      - delete
+  - apiGroups:
+      - ""
+    resources:
+      - pods
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - pods/exec
+    verbs:
+      - create
+  - apiGroups:
+      - ""
+    resources:
+      - pods
+    verbs:
+      - delete
+  - apiGroups:
+      - apps
+    resources:
+      - deployments
+    verbs:
+      - create
+      - get
+      - list
+      - patch
+      - update
+      - watch
+      - delete
+  - apiGroups:
+      - apps
+    resources:
+      - replicasets
+    verbs:
+      - get
+  - apiGroups:
+      - ""
+    resources:
+      - configmaps
+    verbs:
+      - list
+      - get
+      - watch
+  - apiGroups:
+      - coordination.k8s.io
+    resources:
+      - leases
+    verbs:
+      - create
+      - get
+      - update
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: pinniped-concierge-pre-authn-apis
+  labels:
+    {{- include "concierge.labels" . | nindent 4 }}
+rules:
+  - apiGroups:
+      - login.concierge.pinniped.dev
+    resources:
+      - tokencredentialrequests
+    verbs:
+      - create
+      - list
+  - apiGroups:
+      - identity.concierge.pinniped.dev
+    resources:
+      - whoamirequests
+    verbs:
+      - create
+      - list
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: pinniped-concierge-kube-system-pod-read
+  labels:
+    {{- include "concierge.labels" . | nindent 4 }}
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - pods
+    verbs:
+      - get
+      - list
+      - watch
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: pinniped-concierge-cluster-info-lister-watcher
+  labels:
+    {{- include "concierge.labels" . | nindent 4 }}
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - configmaps
+    verbs:
+      - list
+      - watch
+---
