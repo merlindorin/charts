@@ -3,4 +3,6 @@ remote: origin
 target-branch: main
 chart-dirs:
   - charts
+chart-repos:
+  - merlindorin=https://merlindorin.github.io/charts
 helm-extra-args: --timeout 600s

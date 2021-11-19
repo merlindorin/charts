@@ -1,0 +1,4 @@
+supervisor:
+  enabled: false
+concierge:
+  enabled: false
