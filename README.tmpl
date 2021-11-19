@@ -1,3 +1,6 @@
+{{- $owner := (getenv "OWNER" "merlindorin") -}}
+{{- $source := (getenv "REPO" "/data") -}}
+{{- defineDatasource "charts" (printf "file://%s/%s/" $source "charts") -}}
 Charts
 ======
 
@@ -6,20 +9,23 @@ Charts
 ### TL;DR
 
 ```shell
-helm repo add merlindorin https://merlindorin.github.io/charts
-helm search repo merlindorin
+helm repo add {{ $owner }} https://{{ $owner }}.github.io/charts
+helm search repo {{ $owner }}
 
 # Install any chart you need
-helm install my-release merlindorin/<chart>
+helm install my-release {{ $owner }}/<chart>
 ```
 
 ### Chart Available
 
 | Chart Name | Description | Last Version | App Version | Install |
 |------------|-------------|:------------:|:-----------:|---------|
-| [`pinniped-concierge`](charts/concierge) | A Pinniped concierge helm chart for Kubernetes | 0.1.2 | 0.12.0 | `helm install my-release merlindorin/pinniped-concierge` |
-| [`pinniped`](charts/pinniped) | A Meta Pinniped Helm chart for Kubernetes | 0.1.4 | - | `helm install my-release merlindorin/pinniped` |
-| [`pinniped-supervisor`](charts/supervisor) | A Pinniped supervisor helm chart for Kubernetes | 0.1.2 | 0.12.0 | `helm install my-release merlindorin/pinniped-supervisor` |
+{{- range (datasource "charts") -}}
+{{ defineDatasource . (printf "%s/%s/%s/%s" $source "charts" . "Chart.yaml") }}
+| [`{{ (ds .).name }}`]({{ printf "%s/%s" "charts" . }}) | {{ (ds .).description }} | {{ (ds .).version }} | {{ if coll.Has (ds .) "appVersion" -}}
+{{ (ds .).appVersion }}
+{{- else }}-{{- end }} | `helm install my-release {{ $owner }}/{{ (ds .).name }}` |
+{{- end }}
 
 
 ### Before you begin
@@ -44,12 +50,12 @@ To install Helm, refer to the [Helm install guide](https://github.com/helm/helm#
 The following command allows you to download and install all the charts from this repository:
 
 ```bash
-$ helm repo add merlindorin https://merlindorin.github.io/charts
+$ helm repo add {{ $owner }} https://{{ $owner }}.github.io/charts
 ```
 
 #### Using Helm
 
-Once you have installed the Helm client, you can deploy a merlindorin Helm Chart into a Kubernetes cluster.
+Once you have installed the Helm client, you can deploy a {{ $owner }} Helm Chart into a Kubernetes cluster.
 
 Please refer to the [Quick Start guide](https://helm.sh/docs/intro/quickstart/) if you wish to get running in just a
 few commands, otherwise the [Using Helm Guide](https://helm.sh/docs/intro/using_helm/) provides detailed instructions
@@ -57,7 +63,7 @@ on how to use the Helm client to manage packages on your Kubernetes cluster.
 
 Useful Helm Client Commands:
 * View available charts: `helm search repo`
-* Install a chart: `helm install my-release merlindorin/<package-name>`
+* Install a chart: `helm install my-release {{ $owner }}/<package-name>`
 * Upgrade your application: `helm upgrade`
 
 ### Development
