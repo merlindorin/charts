@@ -1,0 +1,8 @@
+apiVersion: config.supervisor.pinniped.dev/v1alpha1
+kind: FederationDomain
+metadata:
+  name: {{ include "pinniped.fullname" . }}
+spec:
+  issuer: {{ .Values.supervisor.federation.issuer }}
+  tls:
+    secretName: {{ .Values.supervisor.federation.tls.secretName }}

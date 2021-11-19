@@ -1,4 +1,95 @@
 supervisor:
   enabled: false
+  federation:
+    enabled: false
+    # The hostname would typically match the DNS name of the public ingress or load balancer for the cluster.
+    # Any path can be specified, which allows a single hostname to have multiple different issuers. The path is optional.
+    issuer:
+
+    # Optionally configure the name of a Secret in the same namespace, of type `kubernetes.io/tls`,
+    # which contains the TLS serving certificate for the HTTPS endpoints served by this OIDC Provider.
+    tls:
+      secretName:
+
+  identityProvider:
+    ldap:
+      enabled: false
+      # Specify the host of the LDAP server.
+      host:
+
+      # Specify the CA certificate of the LDAP server as a
+      # base64-encoded PEM bundle.
+      tls:
+        certificateAuthorityData:
+
+      # Specify how to search for the username when an end-user tries to log in
+      # using their username and password.
+      userSearch:
+
+        # Specify the root of the user search.
+        base:
+
+        # Specify how to filter the search to find the specific user by username.
+        # "{}" will be replaced # by the username that the end-user had typed
+        # when they tried to log in.
+        filter:
+
+        # Specify which fields from the user entry should be used upon
+        # successful login.
+        attributes:
+
+          # Specifies the name of the attribute in the LDAP entry whose
+          # value shall become the username of the user after a successful
+          # authentication.
+          username:
+
+          # Specifies the name of the attribute in the LDAP entry whose
+          # value shall be used to uniquely identify the user within this
+          # LDAP provider after a successful authentication.
+          uid:
+
+      # Specify how to search for the group membership of an end-user during login.
+      groupSearch:
+
+        # Specify the root of the group search. This may be a different subtree of
+        # the LDAP database compared to the user search, but in this case users
+        # and groups are mixed together in the LDAP database.
+        base:
+
+        # Specify the search filter which should be applied when searching for
+        # groups for a user. "{}" will be replaced by the dn (distinguished
+        # name) of the user entry found as a result of the user search.
+        filter:
+
+        # Specify which fields from each group entry should be used upon
+        # successful login.
+        attributes:
+
+          # Specify the name of the attribute in the LDAP entries whose value
+          # shall become a group name in the user’s list of groups after a
+          # successful authentication.
+          groupName:
+
+      # Specify the name of the Kubernetes Secret that contains your OpenLDAP
+      # bind account credentials. This service account will be used by the
+      # Supervisor to perform user and group searches on the LDAP server.
+      bind:
+        secretName:
+
 concierge:
   enabled: false
+  jwtAuthenticator:
+    enabled: false
+    # The value of the `issuer` field should exactly match the `issuer`
+    # field of your Supervisor's FederationDomain.
+    issuer:
+
+    # You can use any `audience` identifier for your cluster, but it is
+    # important that it is unique for security reasons.
+    audience:
+
+    # If the TLS certificate of your FederationDomain is not signed by
+    # a standard CA trusted by the Concierge pods by default, then
+    # specify its CA here as a base64-encoded PEM.
+    tls:
+      certificateAuthorityData:

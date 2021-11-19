@@ -1,0 +1,21 @@
+apiVersion: idp.supervisor.pinniped.dev/v1alpha1
+kind: LDAPIdentityProvider
+metadata:
+  name: {{ include "pinniped.fullname" . }}
+spec:
+  host: {{ .Values.supervisor.identityProvider.ldap.host | quote }}
+  tls:
+    certificateAuthorityData: {{ .Values.supervisor.identityProvider.ldap.tls.certificateAuthorityData }}
+  userSearch:
+    base: {{ .Values.supervisor.identityProvider.ldap.userSearch.base | quote }}
+    filter: {{ .Values.supervisor.identityProvider.ldap.userSearch.filter | quote }}
+    attributes:
+      username: {{ .Values.supervisor.identityProvider.ldap.userSearch.attributes.username | quote }}
+      uid: {{ .Values.supervisor.identityProvider.ldap.userSearch.attributes.uid | quote }}
+  groupSearch:
+    base: {{ .Values.supervisor.identityProvider.ldap.groupSearch.base | quote }}
+    filter: {{ .Values.supervisor.identityProvider.ldap.groupSearch.filter | quote }}
+    attributes:
+      groupName: {{ .Values.supervisor.identityProvider.ldap.groupSearch.attributes.groupName | quote }}
+  bind:
+    secretName: {{ .Values.supervisor.identityProvider.ldap.bind.secretName | quote }}

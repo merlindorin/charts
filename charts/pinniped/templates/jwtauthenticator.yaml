@@ -1,0 +1,9 @@
+apiVersion: authentication.concierge.pinniped.dev/v1alpha1
+kind: JWTAuthenticator
+metadata:
+  name: {{ include "pinniped.fullname" . }}
+spec:
+  issuer: {{ .Values.concierge.jwtAuthenticator.issuer | quote }}
+  audience: {{ .Values.concierge.jwtAuthenticator.audience | quote }}
+  tls:
+    certificateAuthorityData:  {{ .Values.concierge.jwtAuthenticator.tls.certificateAuthorityData | quote }}
