@@ -1,9 +1,9 @@
 dependencies:
 - name: pinniped-supervisor
   repository: https://merlindorin.github.io/charts
-  version: 0.1.1
+  version: 0.1.2
 - name: pinniped-concierge
   repository: https://merlindorin.github.io/charts
-  version: 0.1.1
-digest: sha256:2174c9db9952cf8b51ff4b84f6938d3504314b94433698b2cc776d2062578fe8
-generated: "2021-11-19T15:01:50.647081+01:00"
+  version: 0.1.2
+digest: sha256:d7469386851e1f751f05e2656b796c1b5992725c612e1e1bc7974697d9a45ea9
+generated: "2021-11-19T15:55:58.717223+01:00"

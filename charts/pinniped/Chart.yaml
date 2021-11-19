@@ -3,16 +3,16 @@ name: pinniped
 description: A Meta Pinniped Helm chart for Kubernetes
 type: application
 
-version: 0.1.2
+version: 0.1.3
 
 dependencies:
   - condition: supervisor.enabled
     alias: supervisor
     name: pinniped-supervisor
-    version: 0.1.1
+    version: 0.1.2
     repository: https://merlindorin.github.io/charts
   - condition: concierge.enabled
     alias: concierge
     name: pinniped-concierge
-    version: 0.1.1
+    version: 0.1.2
     repository: https://merlindorin.github.io/charts
