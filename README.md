@@ -1,6 +1,8 @@
 Charts
 ======
 
+![Gomplate Version: latest](https://img.shields.io/badge/Gomplate-latest-informational?style=flat-square) ![Helm Doc Version: latest](https://img.shields.io/badge/Helm&nbsp;Doc-latest-informational?style=flat-square)
+
 > Helm chart created mainly for personal use or with a pending contribution.
 
 ### TL;DR
@@ -20,7 +22,6 @@ helm install my-release merlindorin/<chart>
 | [`pinniped-concierge`](charts/concierge) | A Pinniped concierge helm chart for Kubernetes | 0.1.2 | 0.12.0 | `helm install my-release merlindorin/pinniped-concierge` |
 | [`pinniped`](charts/pinniped) | A Meta Pinniped Helm chart for Kubernetes | 0.1.4 | - | `helm install my-release merlindorin/pinniped` |
 | [`pinniped-supervisor`](charts/supervisor) | A Pinniped supervisor helm chart for Kubernetes | 0.1.2 | 0.12.0 | `helm install my-release merlindorin/pinniped-supervisor` |
-
 
 ### Before you begin
 
@@ -62,8 +63,21 @@ Useful Helm Client Commands:
 
 ### Development
 
-- Generate Chart Documentation: `docker run --rm --volume "$(pwd):/helm-docs" -u $(id -u) jnorwood/helm-docs:latest`
-- Generate README: `docker run --rm --volume "$(pwd):/data" -u $(id -u) hairyhenderson/gomplate -f /data/README.tmpl > README.md`
+- Generate `README.md`: `docker run --rm --volume "$(pwd):/data" -u $(id -u) hairyhenderson/gomplate:latest -f /data/README.tmpl > README.md`
+- Generate Chart `README.md`: `docker run --rm --volume "$(pwd):/helm-docs" -u $(id -u) jnorwood/helm-docs:latest`
+
+#### Generate `README.md`
+
+If you want to generate your own documentation, you can use the following environment variables:
+
+- `OWNER`, charts repository owner
+- `REPO`, repository source folder
+
+For example:
+
+```shell
+OWNER=merlindorin REPO=$(PWD) gomplate -f README.tmpl
+```
 
 ### References
 

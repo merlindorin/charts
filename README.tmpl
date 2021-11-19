@@ -1,8 +1,12 @@
 {{- $owner := (getenv "OWNER" "merlindorin") -}}
 {{- $source := (getenv "REPO" "/data") -}}
+{{- $gomplateVersion := (getenv "GOMPLATE_VERSION" "latest") -}}
+{{- $helmDocVersion := (getenv "HELM_DOC_VERSION" "latest") -}}
 {{- defineDatasource "charts" (printf "file://%s/%s/" $source "charts") -}}
 Charts
 ======
+
+![Gomplate Version: {{ $gomplateVersion }}](https://img.shields.io/badge/Gomplate-{{ $gomplateVersion }}-informational?style=flat-square) ![Helm Doc Version: {{ $helmDocVersion }}](https://img.shields.io/badge/Helm&nbsp;Doc-{{ $helmDocVersion }}-informational?style=flat-square)
 
 > Helm chart created mainly for personal use or with a pending contribution.
 
@@ -68,8 +72,21 @@ Useful Helm Client Commands:
 
 ### Development
 
-- Generate Chart Documentation: `docker run --rm --volume "$(pwd):/helm-docs" -u $(id -u) jnorwood/helm-docs:latest`
-- Generate README: `docker run --rm --volume "$(pwd):/data" -u $(id -u) hairyhenderson/gomplate -f /data/README.tmpl > README.md`
+- Generate `README.md`: `docker run --rm --volume "$(pwd):/data" -u $(id -u) hairyhenderson/gomplate:{{ $gomplateVersion }} -f /data/README.tmpl > README.md`
+- Generate Chart `README.md`: `docker run --rm --volume "$(pwd):/helm-docs" -u $(id -u) jnorwood/helm-docs:{{ $helmDocVersion }}`
+
+#### Generate `README.md`
+
+If you want to generate your own documentation, you can use the following environment variables:
+
+- `OWNER`, charts repository owner
+- `REPO`, repository source folder
+
+For example:
+
+```shell
+OWNER={{ $owner }} REPO=$(PWD) gomplate -f README.tmpl
+```
 
 ### References
 
