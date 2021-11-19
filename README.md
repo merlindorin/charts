@@ -44,8 +44,8 @@ To install Helm, refer to the [Helm install guide](https://github.com/helm/helm#
 
 The following command allows you to download and install all the charts from this repository:
 
-```bash
-$ helm repo add merlindorin https://merlindorin.github.io/charts
+```shell
+helm repo add merlindorin https://merlindorin.github.io/charts
 ```
 
 #### Using Helm
@@ -70,12 +70,15 @@ Useful Helm Client Commands:
 
 If you want to generate your own documentation, you can use the following environment variables:
 
-- `OWNER`, charts repository owner
-- `REPO`, repository source folder
+- `OWNER` (default: "merlindorin"), charts repository owner
+- `REPO` (default: "/data"), repository source folder
+- `GOMPLATE_VERSION` (default: "latest"), version used for generating `README.md`
+- `HELM_DOC_VERSION` (default: "latest"), version used for generating chart `README.md`
 
 For example:
 
 ```shell
+# Generate README.md for merlindorin in the current folder
 OWNER=merlindorin REPO=$(PWD) gomplate -f README.tmpl
 ```
 
