@@ -44,6 +44,18 @@ entries:
   pinniped-concierge:
   - apiVersion: v2
     appVersion: 0.12.0
+    created: "2021-11-19T14:55:10.979667498Z"
+    description: A Pinniped concierge helm chart for Kubernetes
+    digest: 17d95513be738772393a1d359f59d0269a4f5096b28187ae67cfaeda5c12fe93
+    maintainers:
+    - email: romain.dary@gmail.com
+      name: Romain DARY
+    name: pinniped-concierge
+    urls:
+    - https://github.com/merlindorin/charts/releases/download/pinniped-concierge-0.1.2/pinniped-concierge-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 0.12.0
     created: "2021-11-19T13:51:15.681562331Z"
     description: A Pinniped concierge helm chart for Kubernetes
     digest: ee42515353a3a4c3bbdb49769cda56a2bb0ded2bca84099bd8425ffec5fd2ece
@@ -57,6 +69,18 @@ entries:
   pinniped-supervisor:
   - apiVersion: v2
     appVersion: 0.12.0
+    created: "2021-11-19T14:55:11.226222549Z"
+    description: A Pinniped supervisor helm chart for Kubernetes
+    digest: ce7d5ebf081d10391f15c5d7cc26234106dd8578b38afab9a69f98ae28b1b956
+    maintainers:
+    - email: romain.dary@gmail.com
+      name: Romain DARY
+    name: pinniped-supervisor
+    urls:
+    - https://github.com/merlindorin/charts/releases/download/pinniped-supervisor-0.1.2/pinniped-supervisor-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 0.12.0
     created: "2021-11-19T13:51:15.884895134Z"
     description: A Pinniped supervisor helm chart for Kubernetes
     digest: 78872c36e4f86bf9863de27d2e66983a67f762f3310a7422ff1f7589d8314385
@@ -67,4 +91,4 @@ entries:
     urls:
     - https://github.com/merlindorin/charts/releases/download/pinniped-supervisor-0.1.1/pinniped-supervisor-0.1.1.tgz
     version: 0.1.1
-generated: "2021-11-19T14:48:03.346156198Z"
+generated: "2021-11-19T14:55:11.22623785Z"
