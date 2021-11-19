@@ -1,5 +1,26 @@
 apiVersion: v1
 entries:
+  pinniped:
+  - apiVersion: v2
+    created: "2021-11-19T14:10:24.352271823Z"
+    dependencies:
+    - alias: supervisor
+      condition: supervisor.enabled
+      name: pinniped-supervisor
+      repository: https://merlindorin.github.io/charts
+      version: 0.1.1
+    - alias: concierge
+      condition: concierge.enabled
+      name: pinniped-concierge
+      repository: https://merlindorin.github.io/charts
+      version: 0.1.1
+    description: A Meta Pinniped Helm chart for Kubernetes
+    digest: 16c3e71b83b7c1172e4de09a6882e4730f6a4d0a53b600c9c875afd1d3f39c7c
+    name: pinniped
+    type: application
+    urls:
+    - https://github.com/merlindorin/charts/releases/download/pinniped-0.1.1/pinniped-0.1.1.tgz
+    version: 0.1.1
   pinniped-concierge:
   - apiVersion: v2
     appVersion: 0.12.0
@@ -26,4 +47,4 @@ entries:
     urls:
     - https://github.com/merlindorin/charts/releases/download/pinniped-supervisor-0.1.1/pinniped-supervisor-0.1.1.tgz
     version: 0.1.1
-generated: "2021-11-19T13:51:15.884906834Z"
+generated: "2021-11-19T14:10:24.352276822Z"
