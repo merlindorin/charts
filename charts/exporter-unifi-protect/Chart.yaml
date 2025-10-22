@@ -5,5 +5,5 @@ maintainers:
   - email: romain.dary@gmail.com
     name: Romain DARY
 
-version: 0.1.1
+version: 0.1.2
 appVersion: "v0.0.8"

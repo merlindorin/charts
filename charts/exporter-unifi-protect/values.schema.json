@@ -1,0 +1,379 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "exporter-unifi-protect",
+  "description": "Helm values schema for exporter-unifi-protect chart",
+  "type": "object",
+  "properties": {
+    "image": {
+      "type": "object",
+      "description": "Container image configuration",
+      "properties": {
+        "repository": {
+          "type": "string",
+          "description": "Container image repository",
+          "default": "ghcr.io/merlindorin/exporter-unifi-protect"
+        },
+        "pullPolicy": {
+          "type": "string",
+          "description": "Image pull policy",
+          "enum": ["Always", "IfNotPresent", "Never"],
+          "default": "IfNotPresent"
+        },
+        "tag": {
+          "type": "string",
+          "description": "Image tag (defaults to chart appVersion if empty)",
+          "default": ""
+        }
+      },
+      "required": ["repository", "pullPolicy"]
+    },
+    "imagePullSecrets": {
+      "type": "array",
+      "description": "Image pull secrets",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "default": []
+    },
+    "nameOverride": {
+      "type": "string",
+      "description": "Override the name of the chart",
+      "default": ""
+    },
+    "fullnameOverride": {
+      "type": "string",
+      "description": "Override the full name of the chart",
+      "default": ""
+    },
+    "serviceAccount": {
+      "type": "object",
+      "description": "Service account configuration",
+      "properties": {
+        "create": {
+          "type": "boolean",
+          "description": "Create a service account",
+          "default": true
+        },
+        "annotations": {
+          "type": "object",
+          "description": "Service account annotations",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {}
+        },
+        "name": {
+          "type": "string",
+          "description": "Service account name (generated if empty)",
+          "default": ""
+        }
+      }
+    },
+    "podAnnotations": {
+      "type": "object",
+      "description": "Pod annotations",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "default": {}
+    },
+    "podSecurityContext": {
+      "type": "object",
+      "description": "Pod security context",
+      "properties": {
+        "runAsNonRoot": {
+          "type": "boolean",
+          "default": true
+        },
+        "runAsUser": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 65534
+        },
+        "runAsGroup": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "fsGroup": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 65534
+        },
+        "fsGroupChangePolicy": {
+          "type": "string",
+          "enum": ["Always", "OnRootMismatch"]
+        },
+        "seccompProfile": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "securityContext": {
+      "type": "object",
+      "description": "Container security context",
+      "properties": {
+        "allowPrivilegeEscalation": {
+          "type": "boolean",
+          "default": false
+        },
+        "readOnlyRootFilesystem": {
+          "type": "boolean",
+          "default": true
+        },
+        "runAsNonRoot": {
+          "type": "boolean",
+          "default": true
+        },
+        "runAsUser": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 65534
+        },
+        "capabilities": {
+          "type": "object",
+          "properties": {
+            "add": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "drop": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": ["ALL"]
+            }
+          }
+        }
+      }
+    },
+    "service": {
+      "type": "object",
+      "description": "Service configuration",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Service type",
+          "enum": ["ClusterIP", "NodePort", "LoadBalancer", "ExternalName"],
+          "default": "ClusterIP"
+        },
+        "port": {
+          "type": "integer",
+          "description": "Service port",
+          "minimum": 1,
+          "maximum": 65535,
+          "default": 9090
+        },
+        "annotations": {
+          "type": "object",
+          "description": "Service annotations",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {}
+        }
+      },
+      "required": ["type", "port"]
+    },
+    "unifiProtect": {
+      "type": "object",
+      "description": "UniFi Protect connection configuration",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "UniFi Protect server address (required if not using existingSecret)",
+          "pattern": "^((https?://)?[a-zA-Z0-9.:-]+(:[0-9]+)?)?$"
+        },
+        "port": {
+          "type": "integer",
+          "description": "UniFi Protect server port",
+          "minimum": 1,
+          "maximum": 65535,
+          "default": 443
+        },
+        "username": {
+          "type": "string",
+          "description": "UniFi Protect username (required if not using existingSecret)"
+        },
+        "password": {
+          "type": "string",
+          "description": "UniFi Protect password (required if not using existingSecret)"
+        },
+        "existingSecret": {
+          "type": "string",
+          "description": "Name of existing secret containing credentials",
+          "default": ""
+        },
+        "existingSecretUsernameKey": {
+          "type": "string",
+          "description": "Key in existingSecret for username",
+          "default": "username"
+        },
+        "existingSecretPasswordKey": {
+          "type": "string",
+          "description": "Key in existingSecret for password",
+          "default": "password"
+        },
+        "insecureSkipVerify": {
+          "type": "boolean",
+          "description": "Skip TLS certificate verification",
+          "default": false
+        }
+      },
+      "required": ["address", "port"]
+    },
+    "metrics": {
+      "type": "object",
+      "description": "Metrics endpoint configuration",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Metrics endpoint path",
+          "pattern": "^/.*$",
+          "default": "/metrics"
+        },
+        "scrapeInterval": {
+          "type": "string",
+          "description": "Metrics scrape interval (duration format)",
+          "pattern": "^[0-9]+(ns|us|µs|ms|s|m|h)$",
+          "default": "30s"
+        }
+      }
+    },
+    "serviceMonitor": {
+      "type": "object",
+      "description": "Prometheus ServiceMonitor configuration",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable ServiceMonitor creation",
+          "default": false
+        },
+        "namespace": {
+          "type": "string",
+          "description": "Namespace for ServiceMonitor (defaults to release namespace)",
+          "default": ""
+        },
+        "interval": {
+          "type": "string",
+          "description": "Scrape interval",
+          "pattern": "^[0-9]+(ns|us|µs|ms|s|m|h)$",
+          "default": "30s"
+        },
+        "scrapeTimeout": {
+          "type": "string",
+          "description": "Scrape timeout",
+          "pattern": "^[0-9]+(ns|us|µs|ms|s|m|h)$",
+          "default": "10s"
+        },
+        "labels": {
+          "type": "object",
+          "description": "Additional labels for ServiceMonitor",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {}
+        },
+        "annotations": {
+          "type": "object",
+          "description": "ServiceMonitor annotations",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {}
+        }
+      }
+    },
+    "resources": {
+      "type": "object",
+      "description": "Container resource limits and requests",
+      "properties": {
+        "limits": {
+          "type": "object",
+          "description": "Resource limits",
+          "properties": {
+            "cpu": {
+              "type": "string",
+              "description": "CPU limit",
+              "pattern": "^[0-9]+(m|[0-9]*)$"
+            },
+            "memory": {
+              "type": "string",
+              "description": "Memory limit",
+              "pattern": "^[0-9]+(Ei?|Pi?|Ti?|Gi?|Mi?|Ki?)$"
+            }
+          }
+        },
+        "requests": {
+          "type": "object",
+          "description": "Resource requests",
+          "properties": {
+            "cpu": {
+              "type": "string",
+              "description": "CPU request",
+              "pattern": "^[0-9]+(m|[0-9]*)$"
+            },
+            "memory": {
+              "type": "string",
+              "description": "Memory request",
+              "pattern": "^[0-9]+(Ei?|Pi?|Ti?|Gi?|Mi?|Ki?)$"
+            }
+          }
+        }
+      }
+    },
+    "nodeSelector": {
+      "type": "object",
+      "description": "Node selector for pod assignment",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "default": {}
+    },
+    "tolerations": {
+      "type": "array",
+      "description": "Pod tolerations",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "operator": {
+            "type": "string",
+            "enum": ["Exists", "Equal"]
+          },
+          "value": {
+            "type": "string"
+          },
+          "effect": {
+            "type": "string",
+            "enum": ["NoSchedule", "PreferNoSchedule", "NoExecute"]
+          },
+          "tolerationSeconds": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "default": []
+    },
+    "affinity": {
+      "type": "object",
+      "description": "Pod affinity rules",
+      "default": {}
+    }
+  }
+}
