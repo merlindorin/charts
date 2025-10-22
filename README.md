@@ -1,9 +1,14 @@
 Charts
 ======
 
-![Gomplate Version: latest](https://img.shields.io/badge/Gomplate-latest-informational?style=flat-square) ![Helm Doc Version: latest](https://img.shields.io/badge/Helm&nbsp;Doc-latest-informational?style=flat-square)
+[![Release Charts](https://github.com/merlindorin/charts/actions/workflows/release.yml/badge.svg)](https://github.com/merlindorin/charts/actions/workflows/release.yml)
+[![Lint and Test Charts](https://github.com/merlindorin/charts/actions/workflows/lint-test.yaml/badge.svg)](https://github.com/merlindorin/charts/actions/workflows/lint-test.yaml)
+[![License](https://img.shields.io/github/license/merlindorin/charts?style=flat-square)](https://github.com/merlindorin/charts/blob/main/LICENCE)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/merlindorin/charts?style=flat-square)](https://github.com/merlindorin/charts/releases)
+[![GitHub stars](https://img.shields.io/github/stars/merlindorin/charts?style=flat-square)](https://github.com/merlindorin/charts/stargazers)
+[![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/merlindorin&style=flat-square)](https://artifacthub.io/packages/search?repo=merlindorin)
 
-> Helm chart created mainly for personal use or with a pending contribution.
+> Helm charts created mainly for personal use or with a pending contribution.
 
 ### TL;DR
 
