@@ -3,6 +3,18 @@ entries:
   exporter-unifi-protect:
   - apiVersion: v2
     appVersion: v0.0.8
+    created: "2025-10-22T02:42:40.146559113Z"
+    description: A Prometheus exporter for UniFi Protect monitoring
+    digest: c1d841d54b77b2ffb76f059abb5e0c60197a6c8ee721bf8403a6afe25b8a81a9
+    maintainers:
+    - email: romain.dary@gmail.com
+      name: Romain DARY
+    name: exporter-unifi-protect
+    urls:
+    - https://github.com/merlindorin/charts/releases/download/exporter-unifi-protect-0.1.2/exporter-unifi-protect-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: v0.0.8
     created: "2025-10-22T02:27:04.232238479Z"
     description: A Prometheus exporter for UniFi Protect monitoring
     digest: a6ab681097abdc07f8c76716a15272b888757a4e84de764a8258b0f629715043
@@ -144,4 +156,4 @@ entries:
     urls:
     - https://github.com/merlindorin/charts/releases/download/pinniped-supervisor-0.1.1/pinniped-supervisor-0.1.1.tgz
     version: 0.1.1
-generated: "2025-10-22T02:27:04.232255932Z"
+generated: "2025-10-22T02:42:40.146589129Z"
