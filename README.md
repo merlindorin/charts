@@ -20,6 +20,7 @@ helm install my-release merlindorin/<chart>
 | Chart Name | Description | Last Version | App Version | Install |
 |------------|-------------|:------------:|:-----------:|---------|
 | [`pinniped-concierge`](charts/concierge) | A Pinniped concierge helm chart for Kubernetes | 0.1.2 | 0.12.0 | `helm install my-release merlindorin/pinniped-concierge` |
+| [`exporter-unifi-protect`](charts/exporter-unifi-protect) | A Prometheus exporter for UniFi Protect monitoring | 0.1.0 | v0.0.8 | `helm install my-release merlindorin/exporter-unifi-protect` |
 | [`pinniped`](charts/pinniped) | A Meta Pinniped Helm chart for Kubernetes | 0.1.4 | - | `helm install my-release merlindorin/pinniped` |
 | [`pinniped-supervisor`](charts/supervisor) | A Pinniped supervisor helm chart for Kubernetes | 0.1.2 | 0.12.0 | `helm install my-release merlindorin/pinniped-supervisor` |
 

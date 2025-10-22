@@ -1,0 +1,9 @@
+apiVersion: v2
+name: exporter-unifi-protect
+description: A Prometheus exporter for UniFi Protect monitoring
+maintainers:
+  - email: romain.dary@gmail.com
+    name: Romain DARY
+
+version: 0.1.0
+appVersion: "v0.0.8"
